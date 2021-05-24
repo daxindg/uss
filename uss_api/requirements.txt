@@ -1,0 +1,5 @@
+redis
+aiomysql
+SQLAlchemy
+sanic
+Sanic-Cors

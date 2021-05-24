@@ -1,0 +1,10 @@
+node_modules
+.DS_Store
+.vscode
+dist
+dist-ssr
+*.swp
+*.local
+.rsync.sh
+.exclude
+__pycache__
