@@ -27,7 +27,7 @@ async def close_session(request, response):
         _base_model_session_ctx.reset(request.ctx.session_ctx_token)
         await request.ctx.session.close()
 
-@app.get("/<key:[a-zA-Z0-9]+>")
+@app.get("/<key:[a-zA-Z0-9+\-]+>")
 async def main(request, key: str):
     url = await get(request.ctx, key)
     if not url:

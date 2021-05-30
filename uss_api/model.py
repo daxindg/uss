@@ -1,5 +1,5 @@
 from sqlalchemy import INTEGER, Column, DateTime, String, func
-from sqlalchemy.orm import declarative_base, relationship
+from sqlalchemy.orm import declarative_base
 
 Base = declarative_base()
 
@@ -8,7 +8,7 @@ class BaseModel(Base):
     __abstract__ = True
     id = Column(INTEGER(), primary_key=True)
     create_at = Column(DateTime(), server_default=func.now())
-    update_at = Column(DateTime(), server_default=func.now(), server_onupdate=func.now())
+    update_at = Column(DateTime(), server_default='CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP')
 
 class Url(BaseModel):
     __tablename__ = "urls"
