@@ -65,15 +65,15 @@ export default defineComponent({
             this.loading = true;
             try {
                 const res = await (
-                    await fetch("https://daxdg.xyz/s/create", {
+                    await fetch(`${window.location}s/create`, {
                         body: data,
                         method: "post",
                     })
                 ).json();
                 if (res.ok) {
                     this.alerts.push({
-                        url: `https://daxdg.xyz/s/${res.data.hash}`,
-                        title: `点击复制 https://daxdg.xyz/s/${res.data.hash} => ${url}`,
+                        url: `${window.location}s/${res.data.hash}`,
+                        title: `点击复制 ${window.location}s/${res.data.hash} => ${url}`,
                     });
                 }
                 else {
