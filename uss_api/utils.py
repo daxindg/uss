@@ -25,7 +25,8 @@ def murmur32(key:bytes, seed=0x64786467) -> int:
     h = seed
 
     for i in range(len(key) >> 2):
-        k = key[i]
+        p = i << 2
+        k = key[p] | (key[p + 1] << 8) | (key[p + 2] << 16) | (key[p + 3] << 24)
         h ^= murmur32_scramble(k)
         h = (h << 13) | (h >> 19);
         h &= _MASK
@@ -33,7 +34,7 @@ def murmur32(key:bytes, seed=0x64786467) -> int:
         h &= _MASK
         
     k = 0
-    for i in range(len(key) & 2,0,-1):
+    for i in range(len(key) & 3,0,-1):
         k <<= 8
         k |= key[i - 1]
         k &= _MASK
@@ -49,3 +50,8 @@ def murmur32(key:bytes, seed=0x64786467) -> int:
     h ^= h >> 16
     h &= _MASK
     return h
+
+# [test]
+if __name__ == "__main__":
+    from sys import argv
+    print(urlhash(argv[1]))
